@@ -1,0 +1,9 @@
+{
+  "name": "project-hp",
+  "version": "1.0.0",
+  "description": "Backend for project hp",
+  "main": "index.js",
+  "repository": "https://github.com/Punaaa/project-hp",
+  "author": "Pontus",
+  "license": "MIT"
+}
