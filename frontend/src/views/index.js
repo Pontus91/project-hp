@@ -5,6 +5,10 @@ import NavBar from '../components/NavBar';
 
 export const routePaths = {
   HOME: '/',
+  LOGIN: '/login',
+  REGISTRERING: '/registrering',
+  ABOUT: '/oss',
+  QUESTION: '/fragor',
 }
 
 const Views = ({ page }) => {
