@@ -39,7 +39,7 @@ export const LogoText = styled.p`
 
 export const LinkText = styled.p`
   color: ${COLORS.blackMain};
-  font-size: 16px;
+  font-size: 14px;
   margin: 15px;
   text-transform: uppercase;
   @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');

@@ -18,7 +18,7 @@ export const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
-  height: 90vh;
+  height: 80vh;
 
 `
 

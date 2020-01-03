@@ -1,8 +1,12 @@
 import React from 'react';
+import {
+  LoginContainer
+} from './StyledLogin';
 
 const LoginPage = () => {
   return(
-    <div>Login</div>
+    <LoginContainer>
+    </LoginContainer>
   )
 }
 

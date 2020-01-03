@@ -2,6 +2,7 @@ import React from 'react';
 import * as components from '../components/index';
 import { connect } from 'react-redux';
 import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 export const routePaths = {
   HOME: '/',
@@ -15,8 +16,9 @@ const Views = ({ page }) => {
   const Component = components[page];
   return (
     <React.Fragment>
-      <NavBar/>
+      <NavBar />
       <Component />
+      <Footer />
     </React.Fragment>
   )
 }

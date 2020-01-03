@@ -1,8 +1,13 @@
 import React from 'react';
+import {
+  QuestionContainer
+} from './StyledQuestionPage';
 
 const QuestionPage = () => {
   return (
-    <div>FAQ</div>
+    <QuestionContainer>
+      Info kommer här snart
+    </QuestionContainer>
   )
 }
 
