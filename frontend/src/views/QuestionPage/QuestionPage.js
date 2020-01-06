@@ -1,12 +1,14 @@
 import React from 'react';
 import {
-  QuestionContainer
+  QuestionContainer, QuestionWrapper, QuestionHeader
 } from './StyledQuestionPage';
 
 const QuestionPage = () => {
   return (
     <QuestionContainer>
-      Info kommer här snart
+     <QuestionWrapper>
+       <QuestionHeader>Vanliga Frågor</QuestionHeader>
+     </QuestionWrapper>
     </QuestionContainer>
   )
 }

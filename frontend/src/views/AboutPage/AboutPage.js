@@ -17,6 +17,6 @@ const AboutPage = () => {
       </InfoTextWrapper>
     </AboutContainer>
   )
-}
+};
 
 export default AboutPage;

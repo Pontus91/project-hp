@@ -7,6 +7,7 @@ import {
 import Tooltip from '../../components/Tooltip';
 import Input from '../../components/Input';
 import { accountInputData } from '../../staticData';
+import axios from 'axios';
 
 const Form = () => {
 
@@ -96,17 +97,28 @@ const Form = () => {
 
 
   /**
-   * Create account function that first checks validation of the input fields then sends an API call to the backend to create the user.
+   * Create account function that checks validation of the input fields and sets validationError to false if valdiation is okay.
    */
-  const createAccount = (e) => {
+  const checkValidation = (e) => {
     e.preventDefault();
     emailValCheck();
     passwordValCheck();
     phoneValCheck();
 
     if (validationError === false) {
-      console.log('axios');
+      createAccount();
     }
+  }
+
+  /**
+   * Function to create the action.
+   */
+  const createAccount = async () => {
+    await axios({
+      method: 'post',
+      url: 'http://localhost:3001/api/user',
+      data: accountInfo,
+    });
   }
 
   return (
@@ -114,7 +126,7 @@ const Form = () => {
       <FormHeader>Skapa Konto</FormHeader>
       {renderInputs()}
       {accountValidation ? <Tooltip text={validationInfo} /> : null}
-      <ConfirmationButton onClick={createAccount}>Skapa Konto</ConfirmationButton>
+      <ConfirmationButton onClick={checkValidation}>Skapa Konto</ConfirmationButton>
     </FormContainer>
   )
 }
