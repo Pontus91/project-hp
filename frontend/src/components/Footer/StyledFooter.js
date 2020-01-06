@@ -9,33 +9,40 @@ import {
 export const FooterContainer = styled.div`
   width: 100%;
   display: flex;
-  height: 10vh;
+  height: 18vh;
 `
 export const InformationWrapper = styled.div`
   flex: 1;
-  border-top: 1px solid black;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: ${COLORS.mainGreen};
 `
 export const InfoHeader = styled.h1`
-  color: ${COLORS.blackMain};
-  font-size: 16px;
+  color: ${COLORS.whiteMain};
+  font-size: 18px;
   @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
   font-family: 'Lato', sans-serif;
   margin: 0;
+  @media (max-width: 576px){
+    font-size: 12px;
+  }
 `
-export const FooterMedia = styled.div`
-  flex: 1;
-  border-top: 1px solid black;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+export const InfoParagraph = styled.p`
+ font-size: 14px;
+ font-family: 'Lato', sans-serif;
+ color: ${COLORS.whiteMain};
+ width: 300px;
+ @media (max-width: 992px){
+  width: 245px;
+}
+ @media (max-width: 576px){
+  font-size: 7px;
+  width: 85px;
+}
 `
-
 export const TwitterLink = styled(Twitter)`
  margin-right: 10px;
 `

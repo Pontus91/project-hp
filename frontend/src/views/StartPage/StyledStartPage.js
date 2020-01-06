@@ -13,13 +13,21 @@ export const StartPageContainer = styled.div`
   background-size: cover;
 `
 
+export const StartInfoText = styled.h1`
+  font-size: 25px;
+  color: ${COLORS.whiteMain};
+  font-family: 'Montserrat',sans-serif;
+  width: 170px;
+  margin-left: 27px;
+`
+
 export const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
-  height: 80vh;
-
+  height: 74vh;
+  flex-direction: column;
 `
 
 export const SignupContainer = styled.div`
@@ -32,29 +40,32 @@ export const SignupContainer = styled.div`
 export const LoginButton = styled.button`
   width: 160px;
   height: 40px;
-  border-radius: 7px;
-  background-color: ${COLORS.mainGreen};
+  border-radius: 20px;
+  background-color: ${COLORS.mainBlue};
   border: none;
   text-transform: uppercase;
   color: ${COLORS.whiteMain};
   @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
   font-family: 'Montserrat', sans-serif;
+  margin-bottom: 15px;
   &:hover{
-    background-color: #45bf18;
+    background-color: ${COLORS.hoverButtonColor};
+    cursor: pointer;
   }
 `
 
 export const SignupButton = styled.button`
   width: 160px;
   height: 40px;
-  border-radius: 7px;
-  background-color: ${COLORS.mainGreen};
+  border-radius: 20px;
+  background-color: ${COLORS.mainBlue};
   border: none;
   text-transform: uppercase;
   color: ${COLORS.whiteMain};
   @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
   font-family: 'Montserrat', sans-serif;
   &:hover{
-    background-color: #45bf18;
+    background-color: ${COLORS.hoverButtonColor};
+    cursor: pointer;
   }
 `

@@ -4,12 +4,25 @@ import { COLORS } from '../../constants';
 export const FormContainer = styled.form`
   border: 1px solid black;
   height: 50vh;
-  width: 50%;
+  width: 35%;
   border-radius: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: ${COLORS.whiteMain};
+  @media (max-width: 576px){
+    width: 100%;
+    border: none;
+  }
+  @media (max-width: 992px){
+    width: 100%;
+    border: none;
+  }
+  @media (max-width: 1024px){
+    width: 100%;
+    border: none;
+  }
 `
 
 export const FormHeader = styled.h1`
@@ -19,7 +32,7 @@ export const FormHeader = styled.h1`
 
 export const ConfirmationButton = styled.button`
   min-width: 70%;
-  background-color: ${COLORS.mainGreen};
+  background-color: ${COLORS.mainBlue};
   height: 30px;
   margin-top: 15px;
   border: none;
@@ -27,6 +40,11 @@ export const ConfirmationButton = styled.button`
   text-transform: uppercase;
 
   &:hover{
-    background-color: #45bf18;
+    background-color: ${COLORS.hoverButtonColor};
+    cursor: pointer;
+  }
+
+  @media (max-width: 576px){
+    margin-bottom: 10px;
   }
 `

@@ -8,7 +8,10 @@ const QUESTION = 'QUESTION';
 const COLORS = {
   whiteMain: '#fff',
   blackMain: '#0e0e0e',
-  mainGreen: '#34ad07',
+  mainGreen: '#022f27',
+  mainDarkRed: '#980c0c',
+  mainBlue: '#338fa7',
+  hoverButtonColor: '#3cabc7',
 }
 
 export {

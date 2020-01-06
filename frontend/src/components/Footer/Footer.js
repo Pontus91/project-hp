@@ -2,24 +2,25 @@ import React from 'react';
 import {
   FooterContainer,
   InformationWrapper,
-  FooterMedia,
   InfoHeader,
-  TwitterLink,
-  FacebookLink,
-  LinkedInLink
+  InfoParagraph
 } from './StyledFooter';
+import { footerData } from '../../staticData';
 
 const Footer = () => {
+
+  const renderInfoBanner = () => footerData.map(({id, text, header}) => {
+    return(
+      <InformationWrapper key={id}>
+        <InfoHeader>{header}</InfoHeader>
+        <InfoParagraph>{text}</InfoParagraph>
+      </InformationWrapper>
+    )
+  });
+    
   return (
     <FooterContainer>
-      <InformationWrapper>
-        <InfoHeader>Det ska vara enkelt att hitta hundpassning!</InfoHeader>
-      </InformationWrapper>
-      <FooterMedia>
-        <TwitterLink />
-        <FacebookLink />
-        <LinkedInLink />
-      </FooterMedia>
+      {renderInfoBanner()}
     </FooterContainer>
   )
 }
