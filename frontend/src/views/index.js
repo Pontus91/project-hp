@@ -10,6 +10,7 @@ export const routePaths = {
   REGISTRERING: '/registrering',
   ABOUT: '/oss',
   QUESTION: '/fragor',
+  PROFILE: '/profil'
 }
 
 const Views = ({ page }) => {

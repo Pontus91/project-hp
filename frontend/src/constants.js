@@ -3,6 +3,7 @@ const LOGIN = 'LOGIN';
 const REGISTRERING = 'REGISTRERING';
 const ABOUT = 'ABOUT';
 const QUESTION = 'QUESTION';
+const PROFILE = 'PROFILE';
 
 
 const COLORS = {
@@ -20,5 +21,6 @@ export {
   LOGIN,
   REGISTRERING,
   ABOUT,
-  QUESTION
+  QUESTION,
+  PROFILE
 };

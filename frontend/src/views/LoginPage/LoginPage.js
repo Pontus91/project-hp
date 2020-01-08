@@ -33,29 +33,30 @@ const LoginPage = () => {
     e.preventDefault();
     axios({
       method: 'post',
-      url: 'http://localhost:3001/xxx',
+      url: 'http://localhost:3001/api/login',
       data: {
         email: email,
         password: password
       }
     }).then(response => {
       console.log(response, 'should be good')
+      window.location.assign('/profil');
+
     }).catch(response => {
       console.log(response, 'failed')
-      //error handling här
       setLoginError(true);
     });
 
   }
 
-  return(
+  return (
     <LoginContainer>
       <LoginInputWrapper>
         <LoginHeader>Logga In</LoginHeader>
         <Input placeholder='Email' onChange={emailInfo} />
-        <Input placeholder='Lösenord' onChange={passwordInfo} />
-        <LoginButton onClick={loginRequest}>Logga In</LoginButton>
-        {loginError ? <Tooltip text='Din epost eller ditt lösenord stämde inte, prova igen'/> : null}
+        <Input placeholder='Lösenord' type='password' onChange={passwordInfo} />
+          <LoginButton onClick={loginRequest}>Logga In</LoginButton>
+        {loginError ? <Tooltip text='Din epost eller ditt lösenord stämde inte, prova igen' /> : null}
       </LoginInputWrapper>
     </LoginContainer>
   )

@@ -1,10 +1,12 @@
 import { NOT_FOUND } from 'redux-first-router';
+import { UPDATE_ROUTE } from './pageAction';
 import {
   HOME,
   LOGIN,
   REGISTRERING,
   ABOUT,
-  QUESTION
+  QUESTION,
+  PROFILE
 } from '../../constants'
 
 const components = {
@@ -13,10 +15,11 @@ const components = {
   LOGIN,
   REGISTRERING,
   ABOUT,
-  QUESTION
+  QUESTION,
+  PROFILE
 };
 
-const page = (state = 'HOME', action = {}) => components[action.type] || state
+const page = (state = 'HOME', action = {UPDATE_ROUTE}) => components[action.type] || state
 
 export {
   page

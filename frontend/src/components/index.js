@@ -4,12 +4,14 @@ import LoginPage from '../views/LoginPage';
 import RegisterPage from '../views/RegisterPage';
 import AboutPage from '../views/AboutPage';
 import QuestionPage from '../views/QuestionPage';
+import ProfilePage from '../views/ProfilePage';
 
 const HOME = () => <StartPage />;
 const LOGIN = () => <LoginPage />;
 const REGISTRERING = () => <RegisterPage />;
 const ABOUT = () => <AboutPage />;
 const QUESTION = () => <QuestionPage />;
+const PROFILE = () => <ProfilePage />;
 
 const NotFound = () => <p>Denna url finns inte på hundpassning.nu</p>;
 
@@ -19,5 +21,6 @@ export {
   LOGIN,
   REGISTRERING,
   ABOUT,
-  QUESTION
+  QUESTION,
+  PROFILE
 }
