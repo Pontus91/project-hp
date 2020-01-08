@@ -6,16 +6,30 @@ const userRoutes = require('./API/userRoutes');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
+const settings = require('./config/settings');
+const ratingRoutes = require('./API/ratingRoutes');
 
-
+/**
+ * Function that connects to the database.
+ */
 connectToDb();
 
 const app = express()
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use(session({
+  secret: settings.cookieSecret,
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    mongooseConnection: global.db
+  })
+}));
+
 app.get('/', (req, res) => res.send('Welcome To Hundpassnings server'));
 
 
-app.use(userRoutes);
+app.use(userRoutes, ratingRoutes);
 app.listen(config.PORT, () => console.log(`Project HP server ligger på port ${config.PORT}`));

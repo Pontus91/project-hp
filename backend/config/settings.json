@@ -1,0 +1,4 @@
+{
+  "passwordSalt": "thisisprojecthp",
+  "cookieSecret": "cookiehpstuff"
+}
