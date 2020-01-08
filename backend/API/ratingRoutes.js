@@ -44,3 +44,5 @@ router.post('/api/ratings', async (req,res) => {
   rater.save();
   res.json(result || error)
 });
+
+module.exports = router;

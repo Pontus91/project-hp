@@ -23,8 +23,11 @@ app.use(session({
   secret: settings.cookieSecret,
   resave: true,
   saveUninitialized: true,
+  cookie: { secure: false },
   store: new MongoStore({
-    mongooseConnection: global.db
+    mongooseConnection: global.db,
+    collection: 's',
+    ttl: 14 * 24 * 60 * 60
   })
 }));
 

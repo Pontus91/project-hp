@@ -19,6 +19,7 @@ router.get('/api/users', async (req, res) => {
  */
 router.post('/api/user', async (req, res) => {
   let save;
+  console.log(req.session.user,'vad har vi')
   save = new User({
     ...req.body,
     password: encryptPassword(req.body.password),
@@ -68,7 +69,11 @@ router.post('/api/login', async (req, res) => {
   if (user === null) {
     return res.status(401).send({ status: 'Du måste ha ett konto för att logga in !' });
   }
-  if (user) { req.session.user = user };
+  if (user){ 
+    req.session.user = user 
+    console.log(req.session, 'JADÅÅÅ')
+    
+  };
   res.json(user ? user : { error: 'not found' });
 });
 
@@ -76,6 +81,7 @@ router.post('/api/login', async (req, res) => {
  * Check if the User is logged in
  */
 router.get('/api/login', async (req, res) => {
+  console.log(req.session, 'session?')
   if (req.session.user) {
     let user = await User.findOne({ email: req.session.user.email })
        .exec().catch(err => {
