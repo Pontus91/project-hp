@@ -36,7 +36,7 @@ const LoginPage = () => {
       url: 'http://localhost:3001/api/login',
       data: {
         email: email,
-        password: password
+        password: password,
       }
     }).then(response => {
       console.log(response, 'should be good')
