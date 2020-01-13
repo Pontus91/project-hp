@@ -1,37 +1,71 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import Link from 'redux-first-router-link';
 import {
   ProfileContainer,
   ButtonWrapper,
   ProfileInfo,
   FindSitterButton,
   StyledImg,
-  ProfileInfoText
+  ProfileInfoText,
+  LogOutButton
 } from './StyledProfilePage';
 
 const ProfilePage = () => {
 
+  const loginInfo = useSelector(state => state.userReducer.userState);
+  const dispatch = useDispatch();
+
+  /**
+   * UseEffect Hook to get userdata and set it to redux state.
+   * Also if a user is not logged in it redirects to the startpage instantly.
+   */
   useEffect(() => {
     axios({
       method: 'get',
-      url: 'http://localhost:3001/api/login',   
+      withCredentials: true,
+      url: 'http://localhost:3001/api/login',
     }).then(response => {
-      console.log(response, 'tjalala');
+      if (response.data.status === 'not logged in') {
+        window.location.assign('/');
+      } else {
+        let data = { ...response.data }
+        dispatch({ type: 'UPDATE_USER', value: data })
+      }
     })
-  })
-  
-  return(
+  }, [dispatch])
+
+  /**
+   * Logout function that logout the user and redirect the user to the startpage.
+   */
+  const logout = () => {
+    axios({
+      method: 'delete',
+      withCredentials: true,
+      url: 'http://localhost:3001/api/login'
+    }).then(response => {
+      window.location.assign('/');
+    })
+  }
+
+  return (
     <ProfileContainer>
-      <ButtonWrapper> 
-        <FindSitterButton>Hitta hundpassning</FindSitterButton>
-        <FindSitterButton>Passa hund</FindSitterButton>
+      <ButtonWrapper>
+        <Link to='/hundpassning'>
+          <FindSitterButton>Hitta hundpassning</FindSitterButton>
+        </Link>
+        <Link to='/finnsinte'>
+          <FindSitterButton>Passa hund</FindSitterButton>
+        </Link>
       </ButtonWrapper>
       <ProfileInfo>
         <StyledImg src='/images/avatar-template.png' />
-        <ProfileInfoText>Epost:</ProfileInfoText>
-        <ProfileInfoText>Telefon:</ProfileInfoText>
+        <ProfileInfoText>Epost: {loginInfo.email} </ProfileInfoText>
+        <ProfileInfoText>Telefon: {loginInfo.phone} </ProfileInfoText>
+        <ProfileInfoText>Beskrivning: {loginInfo.description} </ProfileInfoText>
         <ProfileInfoText>Betyg:</ProfileInfoText>
-        <ProfileInfoText>Beskrivning:</ProfileInfoText>
+        <LogOutButton onClick={logout}>Logga ut</LogOutButton>
       </ProfileInfo>
     </ProfileContainer>
   )

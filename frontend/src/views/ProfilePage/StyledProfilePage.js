@@ -59,4 +59,22 @@ export const StyledImg = styled.img`
 export const ProfileInfoText = styled.p`
   font-size: 16px;
   color: ${COLORS.whiteMain};
+  font-family: 'Montserrat', sans-serif;
+`
+
+export const LogOutButton = styled.button`
+  width: 160px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: ${COLORS.mainBlue};
+  border: none;
+  text-transform: uppercase;
+  color: ${COLORS.whiteMain};
+  @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 15px;
+  &:hover{
+    background-color: ${COLORS.hoverButtonColor};
+    cursor: pointer;
+  }
 `

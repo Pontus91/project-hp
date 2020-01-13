@@ -116,6 +116,7 @@ const Form = () => {
   const createAccount = async () => {
     await axios({
       method: 'post',
+      withCredentials: true,
       url: 'http://localhost:3001/api/user',
       data: accountInfo,
     });

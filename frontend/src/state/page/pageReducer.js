@@ -6,7 +6,8 @@ import {
   REGISTRERING,
   ABOUT,
   QUESTION,
-  PROFILE
+  PROFILE,
+  SITTER
 } from '../../constants'
 
 const components = {
@@ -16,7 +17,8 @@ const components = {
   REGISTRERING,
   ABOUT,
   QUESTION,
-  PROFILE
+  PROFILE,
+  SITTER
 };
 
 const page = (state = 'HOME', action = {UPDATE_ROUTE}) => components[action.type] || state

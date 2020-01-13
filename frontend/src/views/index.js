@@ -10,7 +10,8 @@ export const routePaths = {
   REGISTRERING: '/registrering',
   ABOUT: '/oss',
   QUESTION: '/fragor',
-  PROFILE: '/profil'
+  PROFILE: '/profil',
+  SITTER: '/hundpassning'
 }
 
 const Views = ({ page }) => {

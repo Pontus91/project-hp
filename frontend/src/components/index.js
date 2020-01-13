@@ -5,6 +5,7 @@ import RegisterPage from '../views/RegisterPage';
 import AboutPage from '../views/AboutPage';
 import QuestionPage from '../views/QuestionPage';
 import ProfilePage from '../views/ProfilePage';
+import SitterPage from '../views/SitterPage';
 
 const HOME = () => <StartPage />;
 const LOGIN = () => <LoginPage />;
@@ -12,6 +13,7 @@ const REGISTRERING = () => <RegisterPage />;
 const ABOUT = () => <AboutPage />;
 const QUESTION = () => <QuestionPage />;
 const PROFILE = () => <ProfilePage />;
+const SITTER = () => <SitterPage />;
 
 const NotFound = () => <p>Denna url finns inte på hundpassning.nu</p>;
 
@@ -22,5 +24,6 @@ export {
   REGISTRERING,
   ABOUT,
   QUESTION,
-  PROFILE
+  PROFILE,
+  SITTER
 }

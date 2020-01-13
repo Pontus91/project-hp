@@ -4,6 +4,7 @@ const REGISTRERING = 'REGISTRERING';
 const ABOUT = 'ABOUT';
 const QUESTION = 'QUESTION';
 const PROFILE = 'PROFILE';
+const SITTER = 'SITTER';
 
 
 const COLORS = {
@@ -22,5 +23,6 @@ export {
   REGISTRERING,
   ABOUT,
   QUESTION,
-  PROFILE
+  PROFILE,
+  SITTER
 };

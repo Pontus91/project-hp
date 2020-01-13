@@ -34,6 +34,7 @@ const LoginPage = () => {
     axios({
       method: 'post',
       url: 'http://localhost:3001/api/login',
+      withCredentials: true,
       data: {
         email: email,
         password: password,
