@@ -71,7 +71,6 @@ router.post('/api/login', async (req, res) => {
   }
   if (user){ 
     req.session.user = user 
-    console.log(req.session, 'JADÅÅÅ')
     
   };
   res.json(user ? user : { error: 'not found' });
