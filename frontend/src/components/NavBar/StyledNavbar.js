@@ -44,4 +44,7 @@ export const LinkText = styled.p`
   @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
+  @media (max-width: 576px){
+    font-size: 10px;
+  }
 `
