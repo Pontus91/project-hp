@@ -80,7 +80,6 @@ router.post('/api/login', async (req, res) => {
  * Check if the User is logged in
  */
 router.get('/api/login', async (req, res) => {
-  console.log(req.session, 'session?')
   if (req.session.user) {
     let user = await User.findOne({ email: req.session.user.email })
        .exec().catch(err => {

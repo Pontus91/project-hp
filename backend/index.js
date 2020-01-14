@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
 const settings = require('./config/settings');
 const ratingRoutes = require('./API/ratingRoutes');
+const dogSittingRoutes = require('./API/dogSittingRoutes');
 
 /**
  * Function that connects to the database.
@@ -34,5 +35,5 @@ app.use(session({
 app.get('/', (req, res) => res.send('Welcome To Hundpassnings server'));
 
 
-app.use(userRoutes, ratingRoutes);
+app.use(userRoutes, ratingRoutes, dogSittingRoutes);
 app.listen(config.PORT, () => console.log(`Project HP server ligger på port ${config.PORT}`));

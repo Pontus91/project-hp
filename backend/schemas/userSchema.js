@@ -6,7 +6,9 @@ let userSchema = new Schema({
   password: { type: String, required: true},
   phone: { type: Number, required: true },
   rating: Array,
-  description: { type: String }
+  description: { type: String },
+  needSitting: Array,
+  doSitting: Array
 })
 
 module.exports = mongoose.model('User', userSchema);
