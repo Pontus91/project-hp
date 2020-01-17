@@ -25,7 +25,7 @@ export const accountInputData = [
     id: 3,
     name: 'description',
     type: 'text',
-    placeholder: 'Lite om dig själv, t.ex. vilken hundras du är van vid.'
+    placeholder: 'Kort text om dig själv, t.ex. vilken hundras du är van vid.'
   },
 ]
 

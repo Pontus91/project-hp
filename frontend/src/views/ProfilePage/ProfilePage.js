@@ -9,7 +9,10 @@ import {
   FindSitterButton,
   StyledImg,
   ProfileInfoText,
-  LogOutButton
+  LogOutButton,
+  DescContainer,
+  DescText,
+  DescInfoText
 } from './StyledProfilePage';
 
 const ProfilePage = () => {
@@ -63,7 +66,12 @@ const ProfilePage = () => {
         <StyledImg src='/images/avatar-template.png' />
         <ProfileInfoText>Epost: {loginInfo.email} </ProfileInfoText>
         <ProfileInfoText>Telefon: {loginInfo.phone} </ProfileInfoText>
-        <ProfileInfoText>Beskrivning: {loginInfo.description} </ProfileInfoText>
+        <DescInfoText>Beskrivning </DescInfoText>
+        <DescContainer>
+          <DescText>
+            {loginInfo.description}
+          </DescText>
+        </DescContainer>
         <ProfileInfoText>Betyg:</ProfileInfoText>
         <LogOutButton onClick={logout}>Logga ut</LogOutButton>
       </ProfileInfo>

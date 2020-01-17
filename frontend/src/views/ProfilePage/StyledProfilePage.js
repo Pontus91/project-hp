@@ -78,3 +78,25 @@ export const LogOutButton = styled.button`
     cursor: pointer;
   }
 `
+export const DescContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 170px;
+  height: auto;
+  white-space: normal;
+  border: 1px solid white;
+  border-radius: 5px;
+`
+
+export const DescText = styled.p`
+  font-size: 14px;
+  color: ${COLORS.whiteMain};
+`
+
+export const DescInfoText = styled.p`
+  font-size: 16px;
+  color: ${COLORS.whiteMain};
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+`
