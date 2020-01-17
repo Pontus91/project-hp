@@ -19,7 +19,6 @@ router.get('/api/users', async (req, res) => {
  */
 router.post('/api/user', async (req, res) => {
   let save;
-  console.log(req.session.user,'vad har vi')
   save = new User({
     ...req.body,
     password: encryptPassword(req.body.password),
@@ -38,13 +37,14 @@ router.post('/api/user', async (req, res) => {
  * Delete a user
  */
 router.delete('/api/user/:id', async (req, res) => {
-  try {
-    const userToDelete = await User.findById(req.session.user._id);
-    res.send(userToDelete);
-  }
-  catch (e) {
-    res.status(500).send();
-  }
+  const userToDelete = await User.findById(req.params.id);
+  userToDelete.delete(function (err) {
+    if(err){
+      next(err)
+    } else {
+      res.status(200).send();
+    }
+  })
 });
 
 /**

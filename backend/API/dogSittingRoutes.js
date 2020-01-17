@@ -8,31 +8,35 @@ const User = require('../schemas/userSchema');
  */
 router.post('/api/sitting', async (req, res) => {
   const newSitting = new Sitting({
+    date: req.body.date,
     time: req.body.time,
     breed: req.body.breed,
-    price: req.body.price,
     description: req.body.description,
   })
-  newSitting.save(function (err) {
-    if (err){
-      console.log(err)
-      next(err)
-    } else {
-      res.status(200).send()
-      console.log(event, 'SAVED')
+  if (req.session.user) {
+    if (newSitting) {
+      let user = await User.findOne({ email: req.session.user.email })
+      let error;
+      let result = await newSitting.save().catch(err => error = err);
+      res.json(result || error);
+      user.needSitting.push(result);
+      user.save();
+      if (!error) {
+      }
     }
-  })
+  }
+
 })
 
 /**
  * Get all Sittings
  */
-router.get('/api/sitting', async (req,res) => {
+router.get('/api/sitting', async (req, res) => {
   Sitting.find({})
-  .exec()
-  .then(data => {
-    res.status(200).send(data)
-  });
+    .exec()
+    .then(data => {
+      res.status(200).send(data)
+    });
 });
 
 /**
@@ -45,5 +49,19 @@ router.get('/api/sitting/id/:id', (req, res) => {
       res.status(200).send(data)
     });
 });
+
+/**
+ * Delete a sitting
+ */
+router.delete('/api/sitting/:id', async (req, res) => {
+  const sittingToDelet = await Sitting.findById(req.params.id);
+  sittingToDelet.delete(function (err) {
+    if(err){
+      next(err)
+    } else {
+      res.status(200).send();
+    }
+  })
+})
 
 module.exports = router;
