@@ -11,7 +11,8 @@ export const routePaths = {
   ABOUT: '/oss',
   QUESTION: '/fragor',
   PROFILE: '/profil',
-  SITTER: '/hundpassning'
+  SITTER: '/hundpassning',
+  GETSITTER: '/passa-hund'
 }
 
 const Views = ({ page }) => {

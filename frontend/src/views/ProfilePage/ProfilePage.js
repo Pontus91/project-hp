@@ -58,7 +58,7 @@ const ProfilePage = () => {
         <Link to='/hundpassning'>
           <FindSitterButton>Hitta hundpassning</FindSitterButton>
         </Link>
-        <Link to='/finnsinte'>
+        <Link to='/passa-hund'>
           <FindSitterButton>Passa hund</FindSitterButton>
         </Link>
       </ButtonWrapper>

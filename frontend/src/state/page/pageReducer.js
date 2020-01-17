@@ -7,7 +7,8 @@ import {
   ABOUT,
   QUESTION,
   PROFILE,
-  SITTER
+  SITTER,
+  GETSITTER
 } from '../../constants'
 
 const components = {
@@ -18,10 +19,11 @@ const components = {
   ABOUT,
   QUESTION,
   PROFILE,
-  SITTER
+  SITTER,
+  GETSITTER
 };
 
-const page = (state = 'HOME', action = {UPDATE_ROUTE}) => components[action.type] || state
+const page = (state = 'HOME', action = { UPDATE_ROUTE }) => components[action.type] || state
 
 export {
   page

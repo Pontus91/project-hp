@@ -5,6 +5,7 @@ const ABOUT = 'ABOUT';
 const QUESTION = 'QUESTION';
 const PROFILE = 'PROFILE';
 const SITTER = 'SITTER';
+const GETSITTER = 'GETSITTER';
 
 
 const COLORS = {
@@ -24,5 +25,6 @@ export {
   ABOUT,
   QUESTION,
   PROFILE,
-  SITTER
+  SITTER,
+  GETSITTER
 };

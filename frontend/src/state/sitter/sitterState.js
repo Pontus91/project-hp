@@ -3,6 +3,7 @@ export default {
     date: '',
     time: '',
     breed: '',
-    description: ''
+    description: '',
+    city: 'Alingsås'
   }
 }

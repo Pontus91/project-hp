@@ -2,3 +2,4 @@ export const UPDATE_DATE = 'UPDATE_DATE';
 export const UPDATE_TIME = 'UPDATE_TIME';
 export const UPDATE_BREED = 'UPDATE_BREED';
 export const UPDATE_DESCRIPTION_INFO = 'UPDATE_DESCRIPTION_INFO';
+export const UPDATE_CITY = 'UPDATE_CITY';

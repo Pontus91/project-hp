@@ -12,7 +12,7 @@ export const SitterContainer = styled.div`
 
 export const FormSitterWrapper = styled.div`
   border: 1px solid black;
-  height: 55vh;
+  height: 73vh;
   width: 35%;
   border-radius: 7px;
   display: flex;
@@ -86,5 +86,10 @@ export const SitterButton = styled.button`
     background-color: ${COLORS.hoverButtonColor};
     cursor: pointer;
   }
-  margin-top: 20px;
+  margin-top: 7px;
+`
+
+export const SitterSelect = styled.select`
+  width: 100%;
+  margin-top: 15px;
 `
