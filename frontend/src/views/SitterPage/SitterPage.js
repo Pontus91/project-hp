@@ -110,6 +110,7 @@ const SitterPage = () => {
           time: createSitterInfo.time,
           breed: createSitterInfo.breed,
           description: createSitterInfo.description,
+          city: createSitterInfo.city
 
         }
       }).then(response => {
