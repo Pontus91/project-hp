@@ -12,6 +12,8 @@ router.post('/api/sitting', async (req, res) => {
     time: req.body.time,
     breed: req.body.breed,
     description: req.body.description,
+    city:  req.body.city,
+    sitterFound: false,
   })
   if (req.session.user) {
     if (newSitting) {
