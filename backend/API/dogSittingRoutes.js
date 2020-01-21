@@ -66,4 +66,16 @@ router.delete('/api/sitting/:id', async (req, res) => {
   })
 })
 
+/**
+ * Get sittings for specific user
+ */
+router.get('/api/sitting/user', async (req, res) => {
+  console.log(req.session.user);
+  if(req.session.user){
+    let user = await User.findOne({ email: req.session.user.email })
+    console.log(user);
+    res.json(user.needSitting);
+  }
+})
+
 module.exports = router;
