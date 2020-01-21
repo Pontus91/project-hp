@@ -17,7 +17,8 @@ import {
   DogSitterHeader,
   SitterDesc,
   SitterDescWrapper,
-  SitterAcceptButton
+  SitterAcceptButton,
+  NoMatchDiv,
 } from './StyledGetSitterPage';
 import ToolTip from '../../components/Tooltip';
 
@@ -29,6 +30,7 @@ const GetSitterPage = () => {
   const [cityError, setCityError] = useState(false);
   const [searchSittings, setSearchSittings] = useState([]);
   const [widthBooking, setWidthBooking] = useState('74vh');
+  const [sittingsFound, setSittingsFound] = useState(false);
 
   const useFetch = url => {
     const [dogSitting, setDogSitting] = useState([]);
@@ -53,30 +55,55 @@ const GetSitterPage = () => {
     } else if (allCities.length === 1) {
       allCities.forEach(chosenCity => {
         const availableSitting = dogSitting.filter(element => element.city === chosenCity.text);
-        setSearchSittings(availableSitting)
-        setCitySearchDone(true);
+        if (availableSitting.length > 0) {
+          setSearchSittings(availableSitting)
+          setCitySearchDone(true);
+          setSittingsFound(true);
+        } else {
+          setCitySearchDone(true);
+          setSittingsFound(false);
+        }
       })
-    } else if (allCities.length > 1){
-      for (let cities of allCities){
-        for(let sittings of dogSitting){
-          if(sittings.city === cities.text){
+    } else if (allCities.length > 1) {
+      for (let cities of allCities) {
+        for (let sittings of dogSitting) {
+          if (sittings.city === cities.text) {
             searchSittings.push(sittings);
             setCitySearchDone(true);
             setWidthBooking('auto');
+            setSittingsFound(true);
+          } else {
+            const noMatch = dogSitting.filter(element => element.city === cities.text);
+            if (noMatch.length === 0) {
+              setCitySearchDone(true);
+              setSittingsFound(false);
+            }
           }
         }
       }
     }
   }
 
+  /**
+   * Easy function for the user to go back if no cities were found.
+   */
+  const goBack = () => {
+    setCitySearchDone(false);
+  }
 
   /**
    * Gets the event target value you write in your input and adds a city to the state.
+   * Also helps with typ for example if you write a city for example stockholm it will return Stockholm
    */
   const getCity = (e) => {
     e.preventDefault();
-    setSearchCity(e.target.value)
+    const value = e.target.value;
+    if(value.length > 0){
+      const newValue = `${value[0].toUpperCase()}${value.slice(1)}`;
+      setSearchCity(newValue);
+    }
   }
+
 
   /**
    * Adds a city to the setAllCities array.
@@ -118,9 +145,13 @@ const GetSitterPage = () => {
   })
 
   return (
-    <GetSitterContainer style={{height: widthBooking}}>
+    <GetSitterContainer style={{ height: widthBooking }}>
       {citySearchDone ?
-        <SitterListWrapper>{renderSittings()}</SitterListWrapper>
+        <SitterListWrapper>{sittingsFound ? renderSittings() :
+          <NoMatchDiv>
+            <DogSitterHeader style={{ color: '#000' }}>Inga hundpassningar fanns på valda städer</DogSitterHeader>
+            <CompleteButton onClick={goBack} style={{ width: '50%' }}>Gå tillbaka</CompleteButton>
+          </NoMatchDiv>}</SitterListWrapper>
         : <SitterListWrapper>
           <SitterHeader>Sök hundpassning</SitterHeader>
           <SearchSitterCity>

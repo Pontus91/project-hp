@@ -12,7 +12,8 @@ export const routePaths = {
   QUESTION: '/fragor',
   PROFILE: '/profil',
   SITTER: '/hundpassning',
-  GETSITTER: '/passa-hund'
+  GETSITTER: '/passa-hund',
+  MYDOGSITTINGS: '/min-hunds-passningar'
 }
 
 const Views = ({ page }) => {

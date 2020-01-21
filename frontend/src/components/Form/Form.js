@@ -104,7 +104,6 @@ const Form = () => {
     emailValCheck();
     passwordValCheck();
     phoneValCheck();
-
     if (validationError === false) {
       createAccount();
     }
