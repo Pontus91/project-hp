@@ -106,37 +106,10 @@ router.delete('/api/login', async (req, res) => {
  * Edit an user
  */
 router.put('/api/user/edit/:id', async (req, res) => {
-  let user = await User.findById(req.params.id);
-  user.needSitting[0].sitterFound = req.body.test;
-  user.save(function (err){
-    if (err) {
-      console.log(err)
-      next(err)
-    } else {
-      res.status(200).send()
-    }
-  })
+  User.updateOne({ _id: req.params.id }, req.body.data.updates)
+    .then(result => res.status(200).json(result))
+    .catch(err => console.error(err));
 })
-
-/*
-router.put('/api/user/edit/email', async (req, res) => {
-  let user = await User.findOne({ email: req.body.owner });
-  user.needSitting.forEach(element => {
-    if (JSON.stringify(element._id) === JSON.stringify(req.body.sitting)) {
-      element.sitterFound = true;
-    }
-  });
-    user.save(function (err) {
-      if (err) {
-        console.log(err)
-        next(err)
-      } else {
-        res.status(200).send()
-        res.json(user);
-        console.log(user);
-      }
-    })
-})*/
 
 /**
  * Get all sittings a user HAS to do.
@@ -148,6 +121,17 @@ router.get('/api/user/specific/sittings/:id', async (req, res) => {
   } catch (e) {
     res.status(500).send({ status: 'error' })
   }
+})
+
+/**
+ * Get user by email
+ */
+router.get('/api/user/specific/email/:email', async (req, res) => {
+  const user = await User.findOne({ email: req.params.email })
+    .exec().catch(err => {
+      console.log(err)
+    });
+  res.json(user)
 })
 
 module.exports = router;
