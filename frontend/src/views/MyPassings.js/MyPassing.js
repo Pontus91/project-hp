@@ -12,6 +12,8 @@ const MyPassing = () => {
   const dispatch = useDispatch();
   const [dogsOnMyCare, setDogsOnMyCare] = useState([]);
 
+  console.log(dogsOnMyCare);
+
   /**
    * UseEffect Hook to get userdata and set it to redux state.
    * Also if a user is not logged in it redirects to the startpage instantly.

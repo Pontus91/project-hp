@@ -203,3 +203,68 @@ export const NoMatchDiv = styled.div`
   align-items: center;
   flex-direction: column;
 `
+
+export const AcceptSittingButton = styled.button`
+  margin-top: 35px;
+  width: 45%;
+  height: 38px;
+  border-radius: 20px;
+  background-color: ${COLORS.acceptGreen};
+  border: none;
+  text-transform: uppercase;
+  color: ${COLORS.whiteMain};
+  font-family: 'Montserrat',sans-serif;
+  &:hover{
+    background-color: #53da37;
+    cursor: pointer;
+  }
+  @media (max-width: 576px){
+    width: 60%;
+    height: 38px;
+  }
+`
+
+export const SitterConfirmtWrapper = styled.div`
+  border: 1px solid black;
+  height: auto;
+  width: 30%;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: ${COLORS.whiteMain};
+  @media (max-width: 576px){
+    width: 100% !important;
+    border: none;
+    height: 75vh;
+  }
+  @media (max-width: 992px){
+    width: 100%;
+    border: none;
+  }
+  @media (max-width: 1024px){
+    width: 100%;
+    border: none;
+  } 
+`
+
+export const GoBackButton = styled.button`
+  margin: 35px 0px 35px 0px;
+  width: 45%;
+  height: 38px;
+  border-radius: 20px;
+  background-color: ${COLORS.mainBlue};
+  border: none;
+  text-transform: uppercase;
+  color: ${COLORS.whiteMain};
+  font-family: 'Montserrat',sans-serif;
+  &:hover{
+    background-color: ${COLORS.hoverButtonColor};
+    cursor: pointer;
+  }
+  @media (max-width: 576px){
+    width: 60%;
+    height: 38px;
+  }
+`

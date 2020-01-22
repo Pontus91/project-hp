@@ -17,6 +17,7 @@ const COLORS = {
   mainDarkRed: '#980c0c',
   mainBlue: '#338fa7',
   hoverButtonColor: '#3cabc7',
+  acceptGreen: '#41b729',
 }
 
 export {

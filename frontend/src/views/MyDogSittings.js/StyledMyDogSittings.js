@@ -81,9 +81,16 @@ export const SitterDiv = styled.div`
   display: flex;
 `
 
-export const StatusText = styled.p`
+export const StatusAccepted = styled.div`
+  color: ${COLORS.acceptGreen};
+  font-size: 14px;
+  font-family: 'Lato',sans-serif;
+  font-weight: bold;
+`
+
+export const StatusDeclined = styled.div`
   color: ${COLORS.mainDarkRed};
-  font-size: 16px;
+  font-size: 14px;
   font-family: 'Lato',sans-serif;
   font-weight: bold;
 `

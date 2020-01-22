@@ -84,7 +84,7 @@ const Form = () => {
     } else {
       let isNum = /^\d+$/.test(accountInfo.phone);
       if (accountInfo.phone.length !== 10 || isNum === false) {
-        setValidationInfo('Du måste fylla i ett telefonnummer som består av nummer och är tio siffror långt');
+        setValidationInfo('Du måste fylla i ett telefonnummer som består av enbart nummer och är tio siffror långt');
         setAccountValidation(true);
         setValidationError(true)
       } else {
@@ -119,6 +119,7 @@ const Form = () => {
       url: 'http://localhost:3001/api/user',
       data: accountInfo,
     });
+    window.location.assign('/login');
   }
 
   return (

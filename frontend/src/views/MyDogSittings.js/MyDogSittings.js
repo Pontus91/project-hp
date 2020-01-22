@@ -9,7 +9,8 @@ import {
   SitterText,
   SitterDescWrapper,
   SitterDiv,
-  StatusText
+  StatusDeclined,
+  StatusAccepted
 } from './StyledMyDogSittings';
 import axios from 'axios';
 
@@ -17,8 +18,6 @@ const MyDogSittings = () => {
 
   const [properStyle, setProperStyle] = useState('74vh');
   const [neededSittings, setNeededSittings] = useState([]);
-  const [sitterStatus, setSitterStatus] = useState('Status: Ingen passning hittad');
-  const [status, setStatus] = useState('');
 
   /**
    * UseEffect function to get data for sittings.
@@ -33,6 +32,7 @@ const MyDogSittings = () => {
     })
   }, [setNeededSittings])
 
+
   /**
    * Just to check if you have sittings or not.
    * And change state otherwise.
@@ -44,10 +44,6 @@ const MyDogSittings = () => {
   }, [neededSittings.length])
 
   const renderNeededSittings = () => neededSittings.map(({ _id, date, time, breed, description, city, sitterFound, owner }) => {
-    if (sitterFound === true) {
-      setSitterStatus('Status: Passning hittad');
-      setStatus('#44ef2f');
-    }
     return (
       <SitterPost key={_id}>
         <DogSitterHeader>person i behov av hundpassning</DogSitterHeader>
@@ -58,7 +54,7 @@ const MyDogSittings = () => {
         </SitterDiv>
         <SitterDiv>
           <SitterText>{breed}</SitterText>
-          <StatusText style={{color: status}}>{sitterStatus}</StatusText>
+          {sitterFound ? <StatusAccepted>PASSNING HITTAD</StatusAccepted> : <StatusDeclined>PASSNING INTE HITTAD</StatusDeclined>}
           <SitterText>{city}</SitterText>
         </SitterDiv>
         <SitterDescWrapper>

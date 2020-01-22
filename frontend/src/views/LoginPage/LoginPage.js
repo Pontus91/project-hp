@@ -40,11 +40,9 @@ const LoginPage = () => {
         password: password,
       }
     }).then(response => {
-      console.log(response, 'should be good')
       window.location.assign('/profil');
 
     }).catch(response => {
-      console.log(response, 'failed')
       setLoginError(true);
     });
 

@@ -19,10 +19,12 @@ import {
   SitterDescWrapper,
   SitterAcceptButton,
   NoMatchDiv,
+  AcceptSittingButton,
+  SitterConfirmtWrapper,
+  GoBackButton
 } from './StyledGetSitterPage';
 import ToolTip from '../../components/Tooltip';
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
 
 const GetSitterPage = () => {
 
@@ -33,28 +35,9 @@ const GetSitterPage = () => {
   const [searchSittings, setSearchSittings] = useState([]);
   const [widthBooking, setWidthBooking] = useState('74vh');
   const [sittingsFound, setSittingsFound] = useState(false);
-
-  const loginInfo = useSelector(state => state.userReducer.userState);
-  const dispatch = useDispatch();
-
-  /**
-   * UseEffect Hook to get userdata and set it to redux state.
-   * Also if a user is not logged in it redirects to the startpage instantly.
-   */
-  useEffect(() => {
-    axios({
-      method: 'get',
-      withCredentials: true,
-      url: 'http://localhost:3001/api/login',
-    }).then(response => {
-      if (response.data.status === 'not logged in') {
-        window.location.assign('/');
-      } else {
-        let data = { ...response.data }
-        dispatch({ type: 'UPDATE_USER', value: data })
-      }
-    })
-  }, [dispatch])
+  const [userUpdate, setUserUpdate] = useState([]);
+  const [acceptSitting, setAcceptSitting] = useState(false);
+  const [sittingId, setSittingId] = useState('');
 
   const useFetch = url => {
     const [dogSitting, setDogSitting] = useState([]);
@@ -79,6 +62,7 @@ const GetSitterPage = () => {
     } else if (allCities.length === 1) {
       allCities.forEach(chosenCity => {
         const availableSitting = dogSitting.filter(element => element.city === chosenCity.text);
+        console.log(availableSitting, '1 sittning finns')
         if (availableSitting.length > 0) {
           setSearchSittings(availableSitting)
           setCitySearchDone(true);
@@ -93,6 +77,7 @@ const GetSitterPage = () => {
       for (let cities of allCities) {
         for (let sittings of dogSitting) {
           if (sittings.city === cities.text) {
+            console.log(sittings, 'fler än 1 finns')
             searchSittings.push(sittings);
             setCitySearchDone(true);
             setWidthBooking('auto');
@@ -147,19 +132,39 @@ const GetSitterPage = () => {
     setAllCities(allCities.filter((city) => city.id !== id));
   }
 
-  const selectedSitting = (id, name ) => event => {
-    axios.put(`http://localhost:3001/api/sitting/edit/${id}`, {
+  const selectedSitting = (id, name) => event => {
+    axios.get(`http://localhost:3001/api/user/specific/email/${name}`, {
       sitterFound: true,
       withCredentials: true,
+    }).then(response => {
+      setUserUpdate(response.data);
+      setAcceptSitting(true);
+      setSittingId(id);
     })
-    axios.put('http://localhost:3001/api/user/edit/5e27956e0c70873d2003d170', {
-      withCredentials: true,
-      sitting: id,
-      test: true,
-    })
-    axios.put(`http://localhost:3001/api/sitting/add/${id}`, {
-      withCredentials: true,
-      test: loginInfo.email
+  }
+
+  /**
+   * Simple function to go back if the user is not sure he wants the sitting.
+   */
+  const notAccepted = () => {
+    setAcceptSitting(false);
+  }
+
+  const acceptAndConfirmSitting = () => {
+    userUpdate.needSitting.forEach(chosenSitting => {
+      if (chosenSitting._id === sittingId) {
+        chosenSitting.sitterFound = true;
+        axios.put(`http://localhost:3001/api/user/edit/${userUpdate._id}`, {
+          withCredentials: true,
+          data: {
+            updates: userUpdate
+          }
+        })
+        axios.put(`http://localhost:3001/api/sitting/edit/${sittingId}`, {
+          sitterFound: true,
+          withCredentials: true,
+        })
+      }
     })
   }
 
@@ -188,31 +193,40 @@ const GetSitterPage = () => {
   })
 
   return (
-    <GetSitterContainer style={{ height: widthBooking }}>
-      {citySearchDone ?
-        <SitterListWrapper>{sittingsFound ? renderSittings() :
-          <NoMatchDiv>
-            <DogSitterHeader style={{ color: '#000' }}>Inga hundpassningar fanns på valda städer</DogSitterHeader>
-            <CompleteButton onClick={goBack} style={{ width: '50%' }}>Gå tillbaka</CompleteButton>
-          </NoMatchDiv>}</SitterListWrapper>
-        : <SitterListWrapper>
-          <SitterHeader>Sök hundpassning</SitterHeader>
-          <SearchSitterCity>
-            <SearchInputButtonWrapper>
-              <SearchInput onChange={getCity} placeholder="Stad för passning"></SearchInput>
-              <SearchButton onClick={addCity}>Lägg till stad</SearchButton>
-            </SearchInputButtonWrapper>
-          </SearchSitterCity>
-          <CityTextInfo>Dina valda städer:</CityTextInfo>
-          {allCities.map((searchCity, id) => (
-            <CityText key={id}>{searchCity.text}
-              <RemoveCity onClick={() => removeCity(searchCity.id)} />
-            </CityText>
-          ))}
-          {cityError ? <ToolTip text="Du måste välja en stad" /> : null}
-          <CompleteButton onClick={findSitting}>Hitta passning i vald stad</CompleteButton>
-        </SitterListWrapper>}
-    </GetSitterContainer>
+    <React.Fragment>
+      {acceptSitting ? <GetSitterContainer style={{ height: '74vh' }}>
+        <SitterConfirmtWrapper style={{ width: '30%' }}>
+          <AcceptSittingButton onClick={acceptAndConfirmSitting}>Bekräfta Passning</AcceptSittingButton>
+          <GoBackButton onClick={notAccepted}>Tillbaka</GoBackButton>
+        </SitterConfirmtWrapper>
+      </GetSitterContainer> :
+        <GetSitterContainer style={{ height: widthBooking }}>
+          {citySearchDone ?
+            <SitterListWrapper>{sittingsFound ? renderSittings() :
+              <NoMatchDiv>
+                <DogSitterHeader style={{ color: '#000' }}>Inga hundpassningar fanns på valda städer</DogSitterHeader>
+                <CompleteButton onClick={goBack} style={{ width: '50%' }}>Gå tillbaka</CompleteButton>
+              </NoMatchDiv>}</SitterListWrapper>
+            : <SitterListWrapper>
+              <SitterHeader>Sök hundpassning</SitterHeader>
+              <SearchSitterCity>
+                <SearchInputButtonWrapper>
+                  <SearchInput onChange={getCity} placeholder="Stad för passning"></SearchInput>
+                  <SearchButton onClick={addCity}>Lägg till stad</SearchButton>
+                </SearchInputButtonWrapper>
+              </SearchSitterCity>
+              <CityTextInfo>Dina valda städer:</CityTextInfo>
+              {allCities.map((searchCity, id) => (
+                <CityText key={id}>{searchCity.text}
+                  <RemoveCity onClick={() => removeCity(searchCity.id)} />
+                </CityText>
+              ))}
+              {cityError ? <ToolTip text="Du måste välja en stad" /> : null}
+              <CompleteButton onClick={findSitting}>Hitta passning i vald stad</CompleteButton>
+            </SitterListWrapper>}
+        </GetSitterContainer>
+      }
+    </React.Fragment>
   )
 }
 
