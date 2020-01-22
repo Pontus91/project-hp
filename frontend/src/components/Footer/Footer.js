@@ -2,22 +2,25 @@ import React from 'react';
 import {
   FooterContainer,
   InformationWrapper,
-  InfoHeader,
-  InfoParagraph
+  StyledFocusInfo,
+  StyledFocusText,
+  WrapperForText
 } from './StyledFooter';
 import { footerData } from '../../staticData';
 
 const Footer = () => {
 
-  const renderInfoBanner = () => footerData.map(({id, text, header}) => {
-    return(
+  const renderInfoBanner = () => footerData.map(({ id, text, header }) => {
+    return (
       <InformationWrapper key={id}>
-        <InfoHeader>{header}</InfoHeader>
-        <InfoParagraph>{text}</InfoParagraph>
+        <StyledFocusInfo>{header}</StyledFocusInfo>
+        <StyledFocusText>
+          <WrapperForText>{text}</WrapperForText>
+        </StyledFocusText>
       </InformationWrapper>
     )
   });
-    
+
   return (
     <FooterContainer>
       {renderInfoBanner()}

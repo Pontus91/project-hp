@@ -136,7 +136,7 @@ const SitterPage = () => {
           <SitterLabel>Vilken stad</SitterLabel>
           <SitterSelect onChange={getCity}>{renderCityOptions()}</SitterSelect>
           <SitterLabel>Ytterligare information</SitterLabel>
-          <SitterTextArea onChange={getAdditionalInfo}></SitterTextArea>
+          <SitterTextArea placeholder="T.ex pris per timme och hur länge du behöver passning" onChange={getAdditionalInfo}></SitterTextArea>
           <SitterButton onClick={sitterValidation}>Hitta hundpassning</SitterButton>
         </SitterForm>
       </FormSitterWrapper>

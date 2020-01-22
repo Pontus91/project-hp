@@ -8,6 +8,7 @@ import ProfilePage from '../views/ProfilePage';
 import SitterPage from '../views/SitterPage';
 import GetSitterPage from '../views/GetSitterPage';
 import MyDogSittings from '../views/MyDogSittings.js';
+import MyPassing from '../views/MyPassings.js';
 
 const HOME = () => <StartPage />;
 const LOGIN = () => <LoginPage />;
@@ -18,6 +19,7 @@ const PROFILE = () => <ProfilePage />;
 const SITTER = () => <SitterPage />;
 const GETSITTER = () => <GetSitterPage />;
 const MYDOGSITTINGS = () => <MyDogSittings />;
+const MYPASSING = () => <MyPassing />;
 
 const NotFound = () => <p>Denna url finns inte på hundpassning.nu</p>;
 
@@ -31,5 +33,6 @@ export {
   PROFILE,
   SITTER,
   GETSITTER,
-  MYDOGSITTINGS
+  MYDOGSITTINGS,
+  MYPASSING
 }

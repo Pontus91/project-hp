@@ -61,7 +61,7 @@ const ProfilePage = () => {
         <Link to='/passa-hund'>
           <FindSitterButton>Passa hund</FindSitterButton>
         </Link>
-        <Link to='/'>
+        <Link to='/hundar-jag-passar'>
           <FindSitterButton>Hundar jag passar</FindSitterButton>
         </Link>
         <Link to='/min-hunds-passningar'>

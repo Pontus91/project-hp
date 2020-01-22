@@ -21,6 +21,8 @@ import {
   NoMatchDiv,
 } from './StyledGetSitterPage';
 import ToolTip from '../../components/Tooltip';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 
 const GetSitterPage = () => {
 
@@ -31,6 +33,28 @@ const GetSitterPage = () => {
   const [searchSittings, setSearchSittings] = useState([]);
   const [widthBooking, setWidthBooking] = useState('74vh');
   const [sittingsFound, setSittingsFound] = useState(false);
+
+  const loginInfo = useSelector(state => state.userReducer.userState);
+  const dispatch = useDispatch();
+
+  /**
+   * UseEffect Hook to get userdata and set it to redux state.
+   * Also if a user is not logged in it redirects to the startpage instantly.
+   */
+  useEffect(() => {
+    axios({
+      method: 'get',
+      withCredentials: true,
+      url: 'http://localhost:3001/api/login',
+    }).then(response => {
+      if (response.data.status === 'not logged in') {
+        window.location.assign('/');
+      } else {
+        let data = { ...response.data }
+        dispatch({ type: 'UPDATE_USER', value: data })
+      }
+    })
+  }, [dispatch])
 
   const useFetch = url => {
     const [dogSitting, setDogSitting] = useState([]);
@@ -59,6 +83,7 @@ const GetSitterPage = () => {
           setSearchSittings(availableSitting)
           setCitySearchDone(true);
           setSittingsFound(true);
+          setWidthBooking('74vh');
         } else {
           setCitySearchDone(true);
           setSittingsFound(false);
@@ -77,6 +102,7 @@ const GetSitterPage = () => {
             if (noMatch.length === 0) {
               setCitySearchDone(true);
               setSittingsFound(false);
+              setWidthBooking('auto');
             }
           }
         }
@@ -98,7 +124,7 @@ const GetSitterPage = () => {
   const getCity = (e) => {
     e.preventDefault();
     const value = e.target.value;
-    if(value.length > 0){
+    if (value.length > 0) {
       const newValue = `${value[0].toUpperCase()}${value.slice(1)}`;
       setSearchCity(newValue);
     }
@@ -121,20 +147,37 @@ const GetSitterPage = () => {
     setAllCities(allCities.filter((city) => city.id !== id));
   }
 
+  const selectedSitting = (id, name ) => event => {
+    axios.put(`http://localhost:3001/api/sitting/edit/${id}`, {
+      sitterFound: true,
+      withCredentials: true,
+    })
+    axios.put('http://localhost:3001/api/user/edit/5e27956e0c70873d2003d170', {
+      withCredentials: true,
+      sitting: id,
+      test: true,
+    })
+    axios.put(`http://localhost:3001/api/sitting/add/${id}`, {
+      withCredentials: true,
+      test: loginInfo.email
+    })
+  }
+
   /**
    * Renders all sittings for the dog sitter to see and pick.
    */
-  const renderSittings = () => searchSittings.map(({ _id, date, time, breed, description, city }) => {
+  const renderSittings = () => searchSittings.map(({ _id, date, time, breed, description, city, owner }) => {
     return (
       <SitterPost key={_id}>
-        <DogSitterHeader>person i behov av hundpassning</DogSitterHeader>
+        <DogSitterHeader>person i behov av hundpassning:</DogSitterHeader>
+        <DogSitterHeader>{owner}</DogSitterHeader>
         <SitterDiv>
           <SitterText>Datum: {date}</SitterText>
           <SitterText>Klockslag: {time}</SitterText>
         </SitterDiv>
         <SitterDiv>
           <SitterText>{breed}</SitterText>
-          <SitterAcceptButton>Passa denna hund</SitterAcceptButton>
+          <SitterAcceptButton onClick={selectedSitting(_id, owner)}>Passa denna hund</SitterAcceptButton>
           <SitterText>{city}</SitterText>
         </SitterDiv>
         <SitterDescWrapper>

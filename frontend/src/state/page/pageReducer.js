@@ -9,7 +9,8 @@ import {
   PROFILE,
   SITTER,
   GETSITTER,
-  MYDOGSITTINGS
+  MYDOGSITTINGS,
+  MYPASSING
 } from '../../constants'
 
 const components = {
@@ -22,7 +23,8 @@ const components = {
   PROFILE,
   SITTER,
   GETSITTER,
-  MYDOGSITTINGS
+  MYDOGSITTINGS,
+  MYPASSING
 };
 
 const page = (state = 'HOME', action = { UPDATE_ROUTE }) => components[action.type] || state

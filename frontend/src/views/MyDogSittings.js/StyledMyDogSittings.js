@@ -80,3 +80,10 @@ export const SitterDescWrapper = styled.div`
 export const SitterDiv = styled.div`
   display: flex;
 `
+
+export const StatusText = styled.p`
+  color: ${COLORS.mainDarkRed};
+  font-size: 16px;
+  font-family: 'Lato',sans-serif;
+  font-weight: bold;
+`

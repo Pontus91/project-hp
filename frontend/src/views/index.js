@@ -13,7 +13,8 @@ export const routePaths = {
   PROFILE: '/profil',
   SITTER: '/hundpassning',
   GETSITTER: '/passa-hund',
-  MYDOGSITTINGS: '/min-hunds-passningar'
+  MYDOGSITTINGS: '/min-hunds-passningar',
+  MYPASSING: '/hundar-jag-passar'
 }
 
 const Views = ({ page }) => {

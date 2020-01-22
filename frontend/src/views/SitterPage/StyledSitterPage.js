@@ -8,6 +8,9 @@ export const SitterContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${COLORS.mainGreen};
+  @media (max-width: 576px){
+    height: auto;
+  }
 `
 
 export const FormSitterWrapper = styled.div`
@@ -23,7 +26,7 @@ export const FormSitterWrapper = styled.div`
   @media (max-width: 576px){
     width: 100%;
     border: none;
-    height: 75vh;
+    height: auto;
   }
   @media (max-width: 992px){
     width: 100%;
