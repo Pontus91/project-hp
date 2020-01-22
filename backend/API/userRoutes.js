@@ -39,7 +39,7 @@ router.post('/api/user', async (req, res) => {
 router.delete('/api/user/:id', async (req, res) => {
   const userToDelete = await User.findById(req.params.id);
   userToDelete.delete(function (err) {
-    if(err){
+    if (err) {
       next(err)
     } else {
       res.status(200).send();
@@ -55,7 +55,7 @@ router.get('/api/user/:id', async (req, res) => {
     let user = await User.findById(req.params.id);
     res.json(user);
   } catch (e) {
-    res.status(500).send({ status: 'error'})
+    res.status(500).send({ status: 'error' })
   }
 });
 
@@ -65,13 +65,13 @@ router.get('/api/user/:id', async (req, res) => {
 router.post('/api/login', async (req, res) => {
   let { email, password } = req.body;
   password = encryptPassword(password);
-  let user = await User.findOne({ email, password});
+  let user = await User.findOne({ email, password });
   if (user === null) {
     return res.status(401).send({ status: 'Du måste ha ett konto för att logga in !' });
   }
-  if (user){ 
-    req.session.user = user 
-    
+  if (user) {
+    req.session.user = user
+
   };
   res.json(user ? user : { error: 'not found' });
 });
@@ -82,7 +82,7 @@ router.post('/api/login', async (req, res) => {
 router.get('/api/login', async (req, res) => {
   if (req.session.user) {
     let user = await User.findOne({ email: req.session.user.email })
-       .exec().catch(err => {
+      .exec().catch(err => {
         console.log(err)
       });
     req.session.user = user;
@@ -95,12 +95,59 @@ router.get('/api/login', async (req, res) => {
 /**
  * Logout an user
  */
-router.delete('/api/login', async (req,res) => {
+router.delete('/api/login', async (req, res) => {
   let user = await User.findOne({ email: req.session.user.email })
   user.save()
   delete req.session.user;
   res.json({ status: 'logged out' });
 });
 
+/**
+ * Edit an user
+ */
+router.put('/api/user/edit/:id', async (req, res) => {
+  let user = await User.findById(req.params.id);
+  user.needSitting[0].sitterFound = req.body.test;
+  user.save(function (err){
+    if (err) {
+      console.log(err)
+      next(err)
+    } else {
+      res.status(200).send()
+    }
+  })
+})
+
+/*
+router.put('/api/user/edit/email', async (req, res) => {
+  let user = await User.findOne({ email: req.body.owner });
+  user.needSitting.forEach(element => {
+    if (JSON.stringify(element._id) === JSON.stringify(req.body.sitting)) {
+      element.sitterFound = true;
+    }
+  });
+    user.save(function (err) {
+      if (err) {
+        console.log(err)
+        next(err)
+      } else {
+        res.status(200).send()
+        res.json(user);
+        console.log(user);
+      }
+    })
+})*/
+
+/**
+ * Get all sittings a user HAS to do.
+ */
+router.get('/api/user/specific/sittings/:id', async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id);
+    res.json(user);
+  } catch (e) {
+    res.status(500).send({ status: 'error' })
+  }
+})
 
 module.exports = router;

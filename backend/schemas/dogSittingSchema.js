@@ -7,7 +7,8 @@ let dogSittingSchema = new Schema({
   breed: { type: String, required: true },
   description: String,
   sitterFound: false,
-  city: { type: String, require: true }
+  city: { type: String, require: true },
+  owner: String
 });
 
 module.exports = mongoose.model('dogSitting', dogSittingSchema);

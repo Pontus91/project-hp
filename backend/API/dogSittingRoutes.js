@@ -14,6 +14,7 @@ router.post('/api/sitting', async (req, res) => {
     description: req.body.description,
     city:  req.body.city,
     sitterFound: false,
+    owner: req.session.user.email,
   })
   if (req.session.user) {
     if (newSitting) {
@@ -70,12 +71,37 @@ router.delete('/api/sitting/:id', async (req, res) => {
  * Get sittings for specific user
  */
 router.get('/api/sitting/user', async (req, res) => {
-  console.log(req.session.user);
   if(req.session.user){
     let user = await User.findOne({ email: req.session.user.email })
-    console.log(user);
     res.json(user.needSitting);
   }
+})
+
+/**
+ * Edit specific sitting
+ */
+router.put('/api/sitting/edit/:id', async (req, res) => {
+  let sitting = await Sitting.findById(req.params.id)
+  sitting.sitterFound = req.body.sitterFound;
+  if(sitting){
+    let error;
+    let result = await sitting.save().catch(err => error = err);
+    res.json(result || error);
+    if (!error) {
+    }
+  }
+})
+
+/**
+ * Add a sitting to a user
+ */
+router.put('/api/sitting/add/:id', async (req, res) => {
+  let sitting = await Sitting.findById(req.params.id);
+  let user = await User.findOne({ email: req.body.test })
+  user.doSitting.push(sitting);
+  let error;
+  let result = await user.save().catch(err => error = err);
+  res.json(result || error);
 })
 
 module.exports = router;
