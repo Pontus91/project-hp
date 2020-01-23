@@ -97,11 +97,13 @@ router.put('/api/sitting/edit/:id', async (req, res) => {
  */
 router.put('/api/sitting/add/:id', async (req, res) => {
   let sitting = await Sitting.findById(req.params.id);
-  let user = await User.findOne({ email: req.body.test })
+  let user = await User.findOne({ email: req.body.mail })
+  sitting.sitterFound = true;
   user.doSitting.push(sitting);
   let error;
   let result = await user.save().catch(err => error = err);
-  res.json(result || error);
+  let sitterChange = await sitting.save().catch(err => error = err)
+  res.json(result && sitterChange || error);
 })
 
 module.exports = router;
