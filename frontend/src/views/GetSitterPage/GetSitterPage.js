@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   GetSitterContainer,
   SitterListWrapper,
@@ -39,6 +40,28 @@ const GetSitterPage = () => {
   const [acceptSitting, setAcceptSitting] = useState(false);
   const [sittingId, setSittingId] = useState('');
 
+  const loginInfo = useSelector(state => state.userReducer.userState);
+  const dispatch = useDispatch();
+
+  /**
+   * UseEffect Hook to get userdata and set it to redux state.
+   * Also if a user is not logged in it redirects to the startpage instantly.
+   */
+  useEffect(() => {
+    axios({
+      method: 'get',
+      withCredentials: true,
+      url: 'http://localhost:3001/api/login',
+    }).then(response => {
+      if (response.data.status === 'not logged in') {
+        window.location.assign('/');
+      } else {
+        let data = { ...response.data }
+        dispatch({ type: 'UPDATE_USER', value: data })
+      }
+    })
+  }, [dispatch])
+
   const useFetch = url => {
     const [dogSitting, setDogSitting] = useState([]);
     useEffect(() => {
@@ -62,9 +85,9 @@ const GetSitterPage = () => {
     } else if (allCities.length === 1) {
       allCities.forEach(chosenCity => {
         const availableSitting = dogSitting.filter(element => element.city === chosenCity.text);
-        console.log(availableSitting, '1 sittning finns')
-        if (availableSitting.length > 0) {
-          setSearchSittings(availableSitting)
+        const isSitterFound = availableSitting.filter(element => element.sitterFound === false);
+        if (availableSitting.length > 0 && isSitterFound.length > 0) {
+          setSearchSittings(isSitterFound)
           setCitySearchDone(true);
           setSittingsFound(true);
           setWidthBooking('74vh');
@@ -77,11 +100,12 @@ const GetSitterPage = () => {
       for (let cities of allCities) {
         for (let sittings of dogSitting) {
           if (sittings.city === cities.text) {
-            console.log(sittings, 'fler än 1 finns')
-            searchSittings.push(sittings);
-            setCitySearchDone(true);
-            setWidthBooking('auto');
-            setSittingsFound(true);
+            if (sittings.sitterFound === false) {
+              searchSittings.push(sittings);
+              setCitySearchDone(true);
+              setWidthBooking('auto');
+              setSittingsFound(true);
+            }
           } else {
             const noMatch = dogSitting.filter(element => element.city === cities.text);
             if (noMatch.length === 0) {
@@ -164,6 +188,11 @@ const GetSitterPage = () => {
           sitterFound: true,
           withCredentials: true,
         })
+        axios.put(`http://localhost:3001/api/sitting/add/${sittingId}`, {
+          withCredentials: true,
+          mail: loginInfo.email
+        })
+        window.location.assign('/hundar-jag-passar');
       }
     })
   }
