@@ -37,3 +37,51 @@ export const PassingWrapper = styled.div`
     border: none;
   } 
 `
+export const SitterPost = styled.div`
+  width: 90%;
+  height: auto;
+  border: 1px solid black;
+  margin: 10px;
+  background: ${COLORS.mainGreen};
+  border-radius: 7px;
+`
+
+export const DogSitterHeader = styled.h1`
+  text-align: center;
+  font-size: 16px;
+  font-family: 'Lato',sans-serif;
+  text-transform: uppercase;
+  margin-top: 15px;
+  color: ${COLORS.whiteMain};
+`
+
+export const SitterDescWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+export const SitterDiv = styled.div`
+  display: flex;
+`
+
+export const SitterText = styled.p`
+  flex: 1;
+  text-align: center;
+  font-family: 'Lato',sans-serif;
+  font-weight: bold;
+  color: ${COLORS.whiteMain};
+`
+
+export const SitterDesc = styled.p`
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Lato',sans-serif;
+  color: ${COLORS.whiteMain};
+  width: 40%;
+`
+export const StatusAccepted = styled.div`
+  color: ${COLORS.acceptGreen};
+  font-size: 14px;
+  font-family: 'Lato',sans-serif;
+  font-weight: bold;
+`

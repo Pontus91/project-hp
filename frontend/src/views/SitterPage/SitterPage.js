@@ -114,7 +114,7 @@ const SitterPage = () => {
 
         }
       }).then(response => {
-        console.log(response)
+        window.location.assign('/min-hunds-passningar');
 
       }).catch(response => {
         console.log(response, 'failed')
